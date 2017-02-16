@@ -1,0 +1,15 @@
+#----------------------For this project you may need to install python ---------------#
+
+- You need to install python (if not already installed)
+- Then you need to install pip package of python
+    sudo yum install python-pip (For centos)
+    sudo apt-get install python-pip (For ubuntu)
+-Then install request package for api requests
+    sudo pip install requests
+
+- Then go to your project for e.g
+    cd /home/ali/python_projects/sugar_crm7
+
+- Then run following commands
+  python get_opportunities.py 2017-02-08 2017-02-10
+  python get_leads.py 2017-02-08 2017-02-10
