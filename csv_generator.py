@@ -2,11 +2,17 @@ __author__ = 'ali'
 #For csv generation
 from datetime import datetime
 import csv
-
+import os
 def isNotEmpty(s):
     return bool(s and s.strip())
 
+def create_dir_if_not_exist(module):
+    if os.path.exists(module)==False:
+        os.mkdir(module)
+        
+
 def generate_csv(start_date,end_date,fields,data,module):
+    create_dir_if_not_exist(module)
     csv_file = module+'/'+start_date+'_'+end_date+'_'+datetime.now().strftime('%Y-%m-%d %H:%M:%S')+'.csv'
     csv_file = module+'/test.csv'
 
