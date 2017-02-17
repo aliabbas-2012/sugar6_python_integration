@@ -33,11 +33,12 @@ r = requests.post(auth_url, data = oauth2_token_arguments)
 r.headers['Content-Type'] = 'application/json'
 content = r.json()
 oauth_token = content['access_token']
-print oauth_token
+
+#print oauth_token
 
 filter_url = instance_url + "/Opportunities/filter"
 
-fields_keys = ','.join(fields_list.opportunity_fields_list.keys())
+fields_keys = ','.join(csv_generator.generate_keys(fields_list.opportunity_fields_list))
 filter_arguments = {"filter":
                         [
                             {"$and":
@@ -56,19 +57,20 @@ filter_arguments = {"filter":
 }
 
 
-print '---------------------------------------------------------------'
-print '-------------------content-------------------------------------\n'
+#print '---------------------------------------------------------------'
+#print '-------------------content-------------------------------------\n'
+
 headers = {'content-type': 'application/json','oauth-token':oauth_token}
 data_request = requests.post(filter_url, data=json.dumps(filter_arguments), headers=headers)
 # data_request.headers['Content-Type'] = 'application/json'
 # data_request.headers['oauth-token'] = oauth_token
 data = data_request.json()
 
+#-----------don't need to print -------------#
+#pp = pprint.PrettyPrinter(depth=6)
+#pp.pprint(data['records'])
 
-pp = pprint.PrettyPrinter(depth=6)
-pp.pprint(data['records'])
+#print '-------------------'
+#print len(data['records'])
 
-print '-------------------'
-print len(data['records'])
-
-csv_generator.generate_csv(start_date,end_date,fields_list.opportunity_fields_list.keys(),data,'opportunities')
+csv_generator.generate_csv(start_date,end_date,fields_list.opportunity_fields_list,data,'opportunities')

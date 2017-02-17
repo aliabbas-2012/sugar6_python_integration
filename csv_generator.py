@@ -9,22 +9,36 @@ def isNotEmpty(s):
 def create_dir_if_not_exist(module):
     if os.path.exists(module)==False:
         os.mkdir(module)
-        
+
+def generate_keys(fields):
+    keys = []
+    for k,v in fields:
+        keys.append(k)
+    return keys
+
+def generate_columns(fields):
+    cols = []
+    for k,v in fields:
+        cols.append(v)
+    return cols
 
 def generate_csv(start_date,end_date,fields,data,module):
     create_dir_if_not_exist(module)
-    csv_file = module+'/'+start_date+'_'+end_date+'_'+datetime.now().strftime('%Y-%m-%d %H:%M:%S')+'.csv'
+    #csv_file = module+'/'+module.capitalize()+'_'+start_date+'_'+end_date+'_'+datetime.now().strftime('%Y-%m-%d %H:%M:%S')+'.csv'
+    csv_file = module+'/'+module.capitalize()+'_'+start_date+'_'+end_date+'_'+datetime.now().strftime('%Y-%b-%d')+'.csv'
+
+
     #csv_file = module+'/test.csv'
 
-    field_keys = sorted(fields)
+    #field_keys = sorted(fields.keys())
     with open(csv_file, 'wb') as csvfile:
         csvwriter = csv.writer(csvfile, delimiter=',',quotechar='|', quoting=csv.QUOTE_MINIMAL)
-        csvwriter.writerow(field_keys)
+        csvwriter.writerow(generate_columns(fields))
 
         for k in data['records']:
             row = []
-            print "%s" % (k)
-            for f  in field_keys:
+            #print "%s" % (k)
+            for f,v  in fields:
                 if f in k.keys():
                     if  k[f]!=None:
                         if isinstance(k[f],int):
@@ -36,6 +50,6 @@ def generate_csv(start_date,end_date,fields,data,module):
                 else:
                     row.append('')
 
-            print row
+            #print row
             csvwriter.writerow(row)
     return
