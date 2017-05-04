@@ -6,17 +6,17 @@ import csv_generator
 import sys
 
 #defining url
-instance_url = 'https://copperfasten.providentcrm.com/rest/v10'
-username = 'SalUpwork17'
-password = 'titanhq0702'
+instance_url = 'https://_server_/rest/v10'
+username = ''
+password = ''
 
 #Login - POST /oauth2/token
 auth_url = instance_url + '/oauth2/token'
 
 oauth2_token_arguments = {
     'grant_type' : 'password',
-    'client_id' : 'SalUpwork090217',
-    'client_secret' : 'spamtitan',
+    'client_id' : '',
+    'client_secret' : '',
     'username' : username,
     'password' : password,
     'platform' : 'custom_api'

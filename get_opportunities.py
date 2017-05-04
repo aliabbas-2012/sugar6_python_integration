@@ -17,7 +17,7 @@ auth_url = instance_url + '/oauth2/token'
 oauth2_token_arguments = {
     'grant_type' : '',
     'client_id' : '',
-    'client_secret' : 'spamtitan',
+    'client_secret' : '',
     'username' : username,
     'password' : password,
     'platform' : 'custom_api'
