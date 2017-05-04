@@ -6,6 +6,8 @@ import os
 import sys
 import io
 
+def normalize(s):
+	return s.encode('ascii', 'ignore').decode('ascii')
 def isNotEmpty(s):
     return bool(s and s.strip())
 
@@ -34,7 +36,7 @@ def generate_csv(start_date,end_date,fields,data,module):
     create_dir_if_not_exist(module)
     #csv_file = module+'/'+module.capitalize()+'_'+start_date+'_'+end_date+'_'+datetime.now().strftime('%Y-%m-%d %H:%M:%S')+'.csv'
     csv_file = module+'/'+module.capitalize()+'_'+start_date+'_'+end_date+'_'+datetime.now().strftime('%Y-%b-%d')+'.csv'
-  
+
     #csv_file = module+'/test.csv'
 
     #field_keys = sorted(fields.keys())
@@ -60,7 +62,8 @@ def generate_csv(start_date,end_date,fields,data,module):
                         if isinstance(k[f],int):
                             row.append(k[f])
                         else:
-                            row.append(k[f].encode('utf-8'))
+                            row.append(normalize(k[f]))
+							
                     else:
                         row.append('')
                 else:
